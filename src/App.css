@@ -45,12 +45,16 @@
   max-width: 60%;
 }
 
-.wrap-list-item li button {
+.wrap-list-item li .btn-delete, .wrap-list-item li .btn-edit {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+}
+
+.wrap-list-item li .btn-edit {
+  right: 60px;
 }
 
 .wrap-list-item p {

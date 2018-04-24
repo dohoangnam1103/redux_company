@@ -12,6 +12,10 @@ class Item extends Component {
     deleteItem = (id) => {
         this.props.handleDeleteItem(id)
     }
+
+    editItem = (id) => {
+        console.log(id);
+    }
     
     render() {
         let classStyle = this.props.status ? 'complete' : 'active';
@@ -21,6 +25,7 @@ class Item extends Component {
                 handleClick={this.changeStatus}
                 dataShow={this.props.data}
                 deleteItem={this.deleteItem}
+                editItem={this.editItem}
                 idItem={this.props.idItem}>
             </ItemComponent>
         );
