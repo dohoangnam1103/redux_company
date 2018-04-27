@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import ItemComponent from '../component/ItemComponent';
 import { connect } from 'react-redux';
-import { actChangeStatus, actDeleteItem } from '../actions/index';
+import { actFetchChangeStatus, actFetchDeleteItem } from '../actions/index';
 
 class Item extends Component {
 
     changeStatus = (id) => {
-        this.props.handleChangeStatus(id)
+        this.props.handleChangeStatus(id, this.props.data, this.props.status);
     }
 
     deleteItem = (id) => {
@@ -14,7 +14,9 @@ class Item extends Component {
     }
 
     editItem = (id) => {
-        console.log(id);
+        
+        this.props.handleEditItem(id);
+
     }
     
     render() {
@@ -34,11 +36,16 @@ class Item extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        handleChangeStatus : (id) => {
-            dispatch(actChangeStatus(id))
+        handleChangeStatus : (id, name, status) => {
+            // dispatch(actFetchChangeStatus(id, name, status));
+            dispatch({type: 'START_CHANGE_STATUS', payload: {id : id, name: name, status: status}})
         },
         handleDeleteItem : (id) => {
-            dispatch(actDeleteItem(id))
+            // dispatch(actFetchDeleteItem(id))
+            dispatch({type: 'START_DELETE', payload : {id: id}})
+        },
+        handleEditItem : (id) => {
+            dispatch({type: 'SHOW_EDIT_FORM', id: id})
         }
     }
 }

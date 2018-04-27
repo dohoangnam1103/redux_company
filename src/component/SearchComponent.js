@@ -4,7 +4,6 @@ class SearchComponent extends Component {
 
     render() {
         return (
-            // <p>test</p>
             <div>
                 <form className='search-form' onSubmit={this.props.submitForm}>
                     <input 

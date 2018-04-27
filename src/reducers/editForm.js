@@ -1,14 +1,16 @@
 const EditFormDefault = {
-    showForm : true,
-    valueEdit : ''
+    showForm : false,
+    idEdit: ''
 }
 
 
 const EditReducer = (state = EditFormDefault, action) => {
     switch (action.type) {
         case 'SHOW_EDIT_FORM':
-            console.log(state);
-            return 'all'
+            return {...state, showForm : true, idEdit:action.id}
+
+        case 'HIDE_EDIT_FORM':
+            return {...state, showForm : false}
 
         default:
             return state

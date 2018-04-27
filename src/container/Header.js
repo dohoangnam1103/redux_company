@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import HeaderComponent from '../component/HeaderComponent';
 import { connect } from 'react-redux';
-import { actAddItem, actFilterAll, actFilterComplete, actFilterActive } from '../actions/index';
+import { actFetchAddItem, actFilterAll, actFilterComplete, actFilterActive } from '../actions/index';
 
 class Header extends Component {
     constructor(props) {
@@ -31,6 +31,7 @@ class Header extends Component {
 
             const content = this.state.content;
             const status = false;
+
             this.props.handleSubmitAdd(idNext, content, status);
             this.setState({
                 content: ''
@@ -74,7 +75,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         handleSubmitAdd : (id, content, status) => {
-            dispatch(actAddItem(id, content, status));
+            // dispatch(actFetchAddItem(id, content, status));
+            dispatch({type:'START_ADD', payload: {id: id, content:content, status: status}})
         },
         FilterAll : () => {
             dispatch(actFilterAll());

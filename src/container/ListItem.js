@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import Item from './Item';
+import EditForm from './Edit';
 import ListItemComponent from '../component/ListItemComponent';
 
 class ListItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            message : 'Loading data ...'
+        }
+    }
 
     componentDidMount() {
         const linkData = 'https://5aded024bf932f0014d11afd.mockapi.io/api/v1/todo';
         fetch(linkData)
             .then(response => response.json())
-            .then(data => this.props.fetData(data));
+            .then(data => {
+                this.setState({
+                    message: 'Empty todo'
+                })
+                this.props.fetData(data)});
     }
   
     render() {
-        let ListItem = <p>Loading data</p>;
+        let ListItem = <p>{this.state.message}</p>;
 
         if (this.props.items !== null && this.props.items.length > 0 ){
             if (this.props.filter === 'all') {
@@ -31,10 +42,13 @@ class ListItem extends Component {
         }
 
         return (
-            <ListItemComponent 
-                ListItem={ListItem}
-                editForm={this.props.editForm}
-            ></ListItemComponent>
+            <div>
+                <EditForm></EditForm>
+                <ListItemComponent 
+                    ListItem={ListItem}
+                    
+                ></ListItemComponent>
+            </div>
         );
     }
 }
@@ -46,12 +60,10 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         items: state.ItemReducers,
         filter: state.FilterReducer,
-        keySearch: state.Search,
-        editForm : state.EditReducer
+        keySearch: state.Search
     }
 }
 

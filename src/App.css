@@ -63,6 +63,10 @@
   
 }
 
+.wrap-form-edit {
+  margin-top: 30px;
+}
+
 .wrap-list-item .active {
   color: red;
 }
