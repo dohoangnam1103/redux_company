@@ -1,0 +1,108 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.wrap-header {
+  margin-top: 10px;
+}
+
+.wrap-list-item ul {
+  list-style: none;
+}
+
+.filter-group {
+  margin-top: 10px;
+}
+
+.message {
+  color: green;
+}
+
+.wrap-link a{
+  margin-right: 10px;
+}
+
+.user-infor {
+  display: inline-block;
+  max-width: 50%;
+  padding-left: 70px;
+  /* float: right; */
+  /* margin-right: 20px; */
+}
+
+.search-form {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.wrap-list-item li {
+  margin: auto;
+  position: relative;
+  max-width: 60%;
+}
+
+.wrap-list-item li .btn-delete, .wrap-list-item li .btn-edit {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.wrap-list-item li .btn-edit {
+  right: 60px;
+}
+
+.wrap-list-item p {
+  cursor: pointer;
+  display: inline-block;
+  
+}
+
+.wrap-form-edit {
+  margin-top: 30px;
+}
+
+.wrap-list-item .active {
+  color: red;
+}
+
+.wrap-list-item .complete {
+  color: green;
+}
+
+.wrap-list-item {
+  -webkit-touch-callout: none; 
+  -webkit-user-select: none; 
+   -khtml-user-select: none; 
+     -moz-user-select: none; 
+      -ms-user-select: none; 
+          user-select: none; 
+
+}
+
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
