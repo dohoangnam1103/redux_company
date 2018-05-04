@@ -49,11 +49,6 @@ class Login extends Component {
   }
 
   render() {
-    if (this.props.isLogin){
-      // console.log(this);
-      return (<Redirect to="/"/>)
-    }
-    
     
     return (
       <div className="App">
