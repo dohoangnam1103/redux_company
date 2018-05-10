@@ -22,7 +22,7 @@ class ItemPost extends React.Component { // eslint-disable-line react/prefer-sta
     const { title, body } = this.props.ele;
 
     return (
-      <div className='article-preview'>
+      <div className='article-preview text-xs-left'>
         <div className='article-meta'>
           <Link to='/'>
             <img src="https://static.productionready.io/images/smiley-cyrus.jpg" />

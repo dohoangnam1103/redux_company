@@ -5,6 +5,8 @@ import { createSelector } from 'reselect';
  */
 const selectPaginationDomain = (state) => state.get('pagination');
 
+const selectPaginationDomain2 = (state) => state.get('home');
+
 /**
  * Other specific selectors
  */
@@ -23,3 +25,8 @@ export default makeSelectPagination;
 export {
   selectPaginationDomain,
 };
+
+export const makeSelectPagination2 = () => createSelector(
+  selectPaginationDomain2,
+  (substate) => substate.toJS()
+);
