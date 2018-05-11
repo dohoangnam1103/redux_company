@@ -13,9 +13,7 @@ import { Link } from 'react-router-dom';
 class Tag extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      
-        <Link to='/' className="tag-default tag-pill">{this.props.data}</Link>
-      
+        <a className="tag-default tag-pill">{this.props.data}</a>
     );
   }
 }

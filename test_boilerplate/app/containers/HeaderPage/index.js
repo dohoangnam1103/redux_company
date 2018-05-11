@@ -15,6 +15,7 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectHeaderPage from './selectors';
+import { makeSelectloginPage } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -57,6 +58,7 @@ HeaderPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   headerpage: makeSelectHeaderPage(),
+  loginPage: makeSelectloginPage(),
 });
 
 function mapDispatchToProps(dispatch) {

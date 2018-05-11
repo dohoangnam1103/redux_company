@@ -18,23 +18,29 @@ import messages from './messages';
 
 class ItemPost extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    console.log(this.props);
-    const { title, body } = this.props.ele;
+    const { title, body, author, createdAt, favoritesCount, tagList } = this.props.ele;
+    let xhtml;
+    if( tagList.length > 0 ) {
+      xhtml = tagList.map(ele => {
+        return <li key={ele} className="tag-default tag-pill tag-outline">{ ele }</li>
+      })
+    }
+
 
     return (
       <div className='article-preview text-xs-left'>
         <div className='article-meta'>
           <Link to='/'>
-            <img src="https://static.productionready.io/images/smiley-cyrus.jpg" />
+            <img src={author.image} />
           </Link>
           <div className="info">
-            <a className="author" href="#@ahmedmohsen">ahmedmohsen</a>
-            <span className="date">Thu May 10 2018</span>
+            <a className="author" href="#@ahmedmohsen">{ author.username }</a>
+            <span className="date">{ createdAt }</span>
           </div>
 
           <div className="pull-xs-right">
             <button className="btn btn-sm btn-outline-primary">
-              <i className="ion-heart">1</i>
+              <i className="ion-heart">{ favoritesCount }</i>
             </button>
           </div>
         
@@ -48,8 +54,7 @@ class ItemPost extends React.Component { // eslint-disable-line react/prefer-sta
             <FormattedMessage {...messages.readmore} />
           </Readmore>
           <ul className="tag-list">
-            <li className="tag-default tag-pill tag-outline">sdfds</li>
-            <li className="tag-default tag-pill tag-outline">sdfsdfds</li>
+            {xhtml}
           </ul>
         </Link>
 

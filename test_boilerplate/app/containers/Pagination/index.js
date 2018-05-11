@@ -18,9 +18,30 @@ import reducer from './reducer';
 import saga from './saga';
 import { Link } from 'react-router-dom';
 
+import { actChangePage } from './actions'
+
 export class Pagination extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor (props) {
+    super(props);
+    this.state = {
+      currentPage : 1,
+      ItemInOnePage: 10
+    }
+    
+  }
+  
+  handleClick = (ele) => {
+    ele.preventDefault();
+
+    const valuePage = parseInt(ele.target.innerHTML);
+    this.props.changePage(valuePage, this.state.ItemInOnePage);
+    this.setState({
+      currentPage: valuePage
+    })
+  }
+
   render() {
-    const ItemInOnePage = 10;
+    const {ItemInOnePage} = this.state;
     let numberpage;
     let totalItem = 0;
     let xhtml = [];
@@ -37,11 +58,10 @@ export class Pagination extends React.Component { // eslint-disable-line react/p
 
     if (numberpage > 0) {
       for (let i = 0; i < numberpage; i++){
-        xhtml.push(<Link key={i} to={{
-          pathname: 'pagination',
-          search: '?page'+ (i + 1)
-
-        }} className="page-link page-item">{i + 1}</Link>)
+        const classStyle = (i+1 === this.state.currentPage) ? 'page-item active' : 'page-item';
+        xhtml.push(<li  key={i} className={classStyle} onClick={this.handleClick}>
+                      <a className="page-link" href="">{i + 1}</a>
+                    </li>)
       }
     }
 
@@ -69,6 +89,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    changePage : (page, ItemInOnePage) => {
+      dispatch(actChangePage(page, ItemInOnePage))
+    }
   };
 }
 

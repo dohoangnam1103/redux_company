@@ -28,11 +28,9 @@ function loginPageReducer(state = initialState, action) {
       return state;
 
     case CS_LOGIN_SUCCESS:
-      console.log(action.payload.user);
-  
       const { id, email, createdAt, updatedAt, username, image, token } = action.payload.user;
-      console.log(id, email, createdAt, updatedAt, username, image, token);
-      state.set('data', action.data)
+      // state.set('data', action.data)
+      // debugger
       return  state
                 .set('isLogin', true)
                 .set('userName', username)

@@ -6,6 +6,8 @@ import axios from 'axios';
 import { statusFetchSuccess } from './constants';
 import { getdataSucces, getdataError } from './actions';
 
+import { CS_CHANGE_PAGE } from '../Pagination/constants';
+import { CS_FILTER_TAG } from '../Sidebar/constants';
 
 import { call, put, select, takeLatest, fork } from 'redux-saga/effects';
 import { LOAD_REPOS } from 'containers/App/constants';
@@ -14,45 +16,29 @@ import { reposLoaded, repoLoadingError } from 'containers/App/actions';
 import request from 'utils/request';
 import { makeSelectUsername } from 'containers/HomePage/selectors';
 
-/**
- * Github repos request/response handler
- */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(makeSelectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
 
-  try {
-    // Call our request helper (see 'utils/request')
-    const repos = yield call(request, requestURL);
-    yield put(reposLoaded(repos, username));
-  } catch (err) {
-    yield put(repoLoadingError(err));
-  }
-}
 
+const  linkData = 'https://conduit.productionready.io/api/articles';
+let limit = 10;
+let offset = 0;
+export let linkDataNow;
 
 export function* fetchData() {
-  const data = yield axios.get('https://conduit.productionready.io/api/articles?limit=10');
-
-  yield data.status === statusFetchSuccess && put(getdataSucces(data.data));
-  yield data.status !== statusFetchSuccess && put(getdataError(data));
-
-
+  try {
+    const data = yield axios.get(`${linkData}?limit=${limit}`);
+    yield data.status === statusFetchSuccess && put(getdataSucces(data.data));
+  }
+  catch (error) {
+    yield put(getdataError(error));
+  }
 }
-
-
-
 
 /**
  * Root saga manages watcher lifecycle
  */
 export default function* githubData() {
-  // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
-  // By using `takeLatest` only the result of the latest API call is applied.
-  // It returns task descriptor (just like fork) so we can continue execution
-  // It will be cancelled automatically on component unmount
 
   yield fork(fetchData)
-  yield takeLatest(LOAD_REPOS, getRepos);
+
+
 }

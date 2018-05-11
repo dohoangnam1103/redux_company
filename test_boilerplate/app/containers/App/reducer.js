@@ -16,7 +16,9 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
+  CS_LOGIN_SUCCESS
 } from './constants';
+
 
 // The initial state of the App
 const initialState = fromJS({
@@ -26,6 +28,14 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
+  isLogin: false,
+  username: '',
+  emailUser: '',
+  createdAt: '',
+  updatedAt: '',
+  image: '',
+  id : 0,
+  token : ''
 });
 
 function appReducer(state = initialState, action) {
@@ -44,6 +54,20 @@ function appReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+
+    // case CS_LOGIN_SUCCESS:
+    //   const { id, email, createdAt, updatedAt, username, image, token } = action.payload.user;
+    //   state.set('data', action.data)
+    //   return  state
+    //             .set('isLogin', true)
+    //             .set('userName', username)
+    //             .set('emailUser', email)
+    //             .set('createdAt', createdAt)
+    //             .set('updatedAt', updatedAt)
+    //             .set('id', id)
+    //             .set('token', token)
+    //             .set('image', image)
+
     default:
       return state;
   }

@@ -7,7 +7,8 @@
 import {
   DEFAULT_ACTION,
   CS_GET_TAGS,
-  CS_GET_TAGS_ERROR
+  CS_GET_TAGS_ERROR,
+  CS_FILTER_TAG
 } from './constants';
 
 export function defaultAction() {
@@ -28,5 +29,12 @@ export function actGetError(data) {
   return {
     type: CS_GET_TAGS_ERROR,
     data
+  };
+}
+
+export function actFilterTag(tag) {
+  return {
+    type: CS_FILTER_TAG,
+    tag
   };
 }

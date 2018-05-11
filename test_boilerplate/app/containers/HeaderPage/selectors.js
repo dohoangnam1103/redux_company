@@ -5,6 +5,8 @@ import { createSelector } from 'reselect';
  */
 const selectHeaderPageDomain = (state) => state.get('headerPage');
 
+const selectLoginPageDomain = (state) => state.get('headerPage');
+
 /**
  * Other specific selectors
  */
@@ -18,6 +20,11 @@ const makeSelectHeaderPage = () => createSelector(
   selectHeaderPageDomain,
   (substate) => substate.toJS()
 );
+
+export const makeSelectloginPage = () => createSelector(
+  selectLoginPageDomain,
+  (substate) => substate.toJS()
+)
 
 export default makeSelectHeaderPage;
 export {

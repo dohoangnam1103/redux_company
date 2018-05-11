@@ -17,13 +17,22 @@ import makeSelectSidebar from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import Tag from '../../components/Tag';
+import { actFilterTag } from './actions';
 
 export class Sidebar extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  
+  handleClick = (e) => {
+    e.preventDefault();
+    console.log('123');
+    
+    this.props.filterTag(e.target.innerHTML);
+  }
+  
   render() {
-
+    
     const xhtml = this.props.sidebar.listTag.map(ele=> {
-      return <Tag key={ele} data={ele}></Tag>
+      return <a key={ele} onClick={this.handleClick} className="tag-default tag-pill">{ele}</a>
+
     })
 
     return (
@@ -50,6 +59,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    filterTag : (tag) => {
+      dispatch (actFilterTag(tag))
+    }
   };
 }
 
