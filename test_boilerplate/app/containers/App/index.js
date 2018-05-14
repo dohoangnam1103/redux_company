@@ -20,6 +20,8 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
 import HeaderPage from '../HeaderPage';
 import Footer from 'components/Footer';
+import NewPostPage from '../NewPostPage/Loadable';
+
 
 const AppWrapper = styled.div`
   margin: 0 auto;
@@ -43,6 +45,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/signin" component={LoginPage} />
         <Route path="/signup" component={SignUpPage} />
+        <Route path="/newpost" component={NewPostPage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       {/* <Footer /> */}
