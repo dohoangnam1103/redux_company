@@ -30,7 +30,7 @@ function loginPageReducer(state = initialState, action) {
     case CS_LOGIN_SUCCESS:
       const { id, email, createdAt, updatedAt, username, image, token } = action.payload.user;
       // state.set('data', action.data)
-      // debugger
+   
       return  state
                 .set('isLogin', true)
                 .set('userName', username)
@@ -40,7 +40,6 @@ function loginPageReducer(state = initialState, action) {
                 .set('id', id)
                 .set('token', token)
                 .set('image', image)
-
     default:
       return state;
   }

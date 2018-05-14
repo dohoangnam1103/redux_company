@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 /**
  * Direct selector to the signUpPage state domain
  */
-const selectSignUpPageDomain = (state) => state.get('signUpPage');
+const selectSignUpPageDomain = (state) => state.get('login');
 
 /**
  * Other specific selectors

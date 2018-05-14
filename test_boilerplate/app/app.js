@@ -66,7 +66,6 @@ const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
-store.subscribe(()=>{console.log(store.getState())})
 
 const render = (messages) => {
   ReactDOM.render(

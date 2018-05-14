@@ -25,8 +25,10 @@ import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
+import { changeUsername, actChangeSelectFeed } from './actions';
 import { makeSelectUsername } from './selectors';
+import { makeSelectGloble } from './selectors';
+import { makeSelectLoginPage } from '../LoginPage/selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -46,15 +48,65 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
     }
   }
 
+  constructor (props) {
+    super (props);
+
+    this.state = {
+      pageNow  : 'global'
+    }
+  }
+
+  handleChangePageNow (page, e) {
+    e.preventDefault();
+    this.setState({
+      pageNow : page
+    })
+    this.props.onChangeSelectFeed(page);
+  }
+
   render() {
-    const { loading, error, repos } = this.props;
+    const {
+      loading,
+      error,
+      repos,
+      userName
+    } = this.props;
+
     const reposListProps = {
       loading,
       error,
       repos,
     };
 
+    let xhtml;
+    let classStyleGlobalFeed = (this.state.pageNow === 'global')? "nav-link active": "nav-link";
+    let classStyleMyFeed = (this.state.pageNow === 'myFeed')? "nav-link active": "nav-link";
+
+    if ( this.props.userName.isLogin ) {
+      xhtml = (<ul className="nav nav-pills outline-active">
+                <li onClick={(e) => this.handleChangePageNow('global', e)} className="nav-item">
+                  <a className={classStyleGlobalFeed}>
+                    Global Feed
+                  </a>
+                </li>
+                <li onClick={(e)=>this.handleChangePageNow('myFeed', e)} className="nav-item">
+                  <a className={classStyleMyFeed}>
+                    My Feed
+                  </a>
+                </li>
+              </ul>)
+    } else {
+      xhtml = (<ul className="nav nav-pills outline-active">
+                <li className="nav-item">
+                  <NavLink to='global-feed' className="nav-link active">
+                    Global Feed
+                  </NavLink>
+                </li>
+                </ul>)
+    }
+
     return (
+
       <article>
         <Helmet>
           <title>Home Page</title>
@@ -62,38 +114,21 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         </Helmet>
         <div className='home-page'>
           <CenteredSection>
-
             <IntroWelcome></IntroWelcome>
-
-            
             <div className="container page">
               <div className="row">
                 <div className="col-md-9">
                   <div className="feed-toggle">
-                    <ul className="nav nav-pills outline-active">
-                    <li className="nav-item">
-                      <NavLink to='global-feed' className="nav-link active">
-                        Global Feed
-                      </NavLink></li>
-                    <li className="nav-item">
-                      <NavLink to='my-feed' href className="nav-link">
-                        My Feed
-                      </NavLink>
-                    </li>
-                    </ul>
+                    {xhtml}
                   </div>
                 </div>
               </div>
             </div>
-            
             <div className='row'>
               <ListPost ></ListPost>
               <Sidebar></Sidebar>
             </div>
-
             <Pagination></Pagination>
-
-
           </CenteredSection>
         </div>
       </article>
@@ -123,6 +158,9 @@ export function mapDispatchToProps(dispatch) {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadRepos());
     },
+    onChangeSelectFeed : (data) => {
+      dispatch(actChangeSelectFeed(data));
+    }
   };
 }
 
@@ -131,6 +169,8 @@ const mapStateToProps = createStructuredSelector({
   username: makeSelectUsername(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  globalVariable : makeSelectGloble(),
+  userName: makeSelectLoginPage()
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

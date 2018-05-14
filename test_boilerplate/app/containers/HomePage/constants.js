@@ -14,4 +14,6 @@ export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
 export const statusFetchSuccess = 200;
 export const CsDataSucces = 'GET_DATA_SUCCES';
 export const CsDataError = 'GET_DATA_ERROR';
+export const CS_LOGIN_SUCCESS = 'START_LOGIN_SUCCESS';
+export const CS_CHANGE_SELECT_FEED = 'CHANGE_SELECT_FEED';
 

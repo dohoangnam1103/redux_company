@@ -19,14 +19,14 @@ import {
 // The initial state of the App
 const initialState = fromJS({
   username: '',
-  data: null
+  data: null,
 });
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case CsDataSucces:
       return state.set('data', action.data)
-
+      
     case CHANGE_USERNAME:
       // Delete prefixed '@' from the github username
       return state

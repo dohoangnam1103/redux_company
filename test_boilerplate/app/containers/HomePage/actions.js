@@ -17,7 +17,9 @@
 
 import {
   CHANGE_USERNAME,
-  CsDataSucces
+  CsDataSucces,
+  CsDataError,
+  CS_CHANGE_SELECT_FEED
 } from './constants';
 
 /**
@@ -45,5 +47,12 @@ export function getdataError(error) {
   return {
     type: CsDataError,
     error
+  }
+}
+
+export function actChangeSelectFeed(data) {
+  return {
+    type: CS_CHANGE_SELECT_FEED,
+    data
   }
 }

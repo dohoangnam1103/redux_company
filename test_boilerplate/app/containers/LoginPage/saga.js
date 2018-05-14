@@ -3,19 +3,16 @@ import { takeLatest, put } from 'redux-saga/effects';
 import { CS_LOGIN }  from './constants';
 import { actLoginError, actLoginSuccess }  from './actions';
 import { actUserLogin } from '../HeaderPage/actions';
+import { linkUsersLogin } from '../../utils/api';
 
 import axios from 'axios';
 
-// Individual exports for testing
-
 export function* fetchLogin (action) {
   const { email, password } = action.payload;
-  const linkRequest = 'https://conduit.productionready.io/api/users';
 
   try {
     const repos = yield axios.post(
-      'https://conduit.productionready.io/api/users/login',
-
+      linkUsersLogin,
       {
         "user":{
           "email": email,

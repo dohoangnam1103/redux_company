@@ -2,21 +2,28 @@
 import axios from 'axios';
 
 import { fork, takeLatest, put } from 'redux-saga/effects';
-import { CS_CHANGE_PAGE } from './constants';
+
+import  {  CS_CHANGE_PAGE,
+          limitItem
+        } from './constants';
+
 import { getdataSucces, getdataError } from '../HomePage/actions';
+import { linkArticles } from '../../utils/api';
 
-const  linkData = 'https://conduit.productionready.io/api/articles';
-let limit = 10;
+let limit = limitItem;
 let offset = 0;
-export let linkDataNow;
-
 
 export function* changePage (action) {
   const { page, numberShowOnePage } = action;
   const offset = (page-1)*numberShowOnePage + 1;
-  linkDataNow = `${linkData}?offset=${offset}&limit=${numberShowOnePage}`;
+
   try {
-    const data = yield axios.get(linkDataNow)
+    const data = yield axios.get(linkArticles, {
+      params : {
+        offset,
+        limit: numberShowOnePage
+      }
+    })
     yield  data.data !== undefined && put (getdataSucces(data.data))
   }
   catch(error) {

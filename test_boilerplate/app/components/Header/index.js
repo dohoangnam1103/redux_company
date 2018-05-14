@@ -13,14 +13,14 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
   render() {
 
     const xhtml = this.props.routeConfig.map(ele => {
-      return <HeaderLink key={ele.title} to={ele.link}>
+   
+      return <HeaderLink key={ele.link} to={ele.link}>
         <span>{ele.title}</span>
       </HeaderLink>
     })
     return (
       <div>
         <NavBar>
-
             <LogoStyle to="/">
               Logo
             </LogoStyle>

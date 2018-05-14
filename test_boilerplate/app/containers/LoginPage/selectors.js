@@ -1,9 +1,11 @@
 import { createSelector } from 'reselect';
+import { debug } from 'util';
 
 /**
  * Direct selector to the loginPage state domain
  */
-const selectLoginPageDomain = (state) => state.get('loginPage');
+const selectLoginPageDomain = (state) => state.get('login');
+const selectHomePageDomain = (state) => state.get('global');
 
 /**
  * Other specific selectors
@@ -16,10 +18,18 @@ const selectLoginPageDomain = (state) => state.get('loginPage');
 
 const makeSelectLoginPage = () => createSelector(
   selectLoginPageDomain,
+  (substate) => {
+   return substate.toJS()
+  }
+);
+
+export const makeSelectHomePage = () => createSelector(
+  selectHomePageDomain,
   (substate) => substate.toJS()
 );
 
-export default makeSelectLoginPage;
+
 export {
   selectLoginPageDomain,
-};
+  makeSelectLoginPage
+}

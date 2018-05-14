@@ -48,7 +48,6 @@ export class Pagination extends React.Component { // eslint-disable-line react/p
     
     // console.log(this.props.pagination2.data.articlesCount);
     if (this.props.pagination2.data) {
-      console.log(this.props.pagination2.data.articlesCount);
       totalItem = this.props.pagination2.data.articlesCount;
     }
     

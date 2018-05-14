@@ -28,14 +28,14 @@ const initialState = fromJS({
   userData: {
     repositories: false,
   },
-  isLogin: false,
-  username: '',
-  emailUser: '',
-  createdAt: '',
-  updatedAt: '',
-  image: '',
-  id : 0,
-  token : ''
+  // isLogin: false,
+  // username: '',
+  // emailUser: '',
+  // createdAt: '',
+  // updatedAt: '',
+  // image: '',
+  // id : 0,
+  // token : ''
 });
 
 function appReducer(state = initialState, action) {

@@ -28,8 +28,6 @@ function signUpPageReducer(state = initialState, action) {
       console.log(action.error);
 
     case CS_SIGN_UP_SUCCESS:
-      console.log(action);
-      
       return state;
 
 

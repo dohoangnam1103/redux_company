@@ -6,8 +6,6 @@ import { fork } from 'redux-saga/effects';
 export function* fetchData () {
   
 
-
-
 }
 // Individual exports for testing
 export default function* defaultSaga() {

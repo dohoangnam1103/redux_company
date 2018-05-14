@@ -23,7 +23,6 @@ export class Sidebar extends React.Component { // eslint-disable-line react/pref
   
   handleClick = (e) => {
     e.preventDefault();
-    console.log('123');
     
     this.props.filterTag(e.target.innerHTML);
   }

@@ -20,7 +20,6 @@ function paginationReducer(state = initialState, action) {
       return state;
 
     case CS_CHANGE_PAGE:
-      console.log(action);
       return state
 
     default:

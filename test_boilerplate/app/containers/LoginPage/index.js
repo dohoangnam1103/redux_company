@@ -14,11 +14,13 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectLoginPage from './selectors';
+import {makeSelectLoginPage} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { Link, Redirect } from 'react-router-dom';
+
+import { makeSelectHomePage } from './selectors';
 
 import { actUserLogin } from '../HeaderPage/actions';
 import { actLogin } from './actions';
@@ -52,7 +54,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
 
   render() {
 
-    console.log(this.props.loginpage);
+    
     if (this.props.loginpage.isLogin) {
       return <Redirect to='/'/>
     }
@@ -116,6 +118,7 @@ LoginPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   loginpage: makeSelectLoginPage(),
+  globalVariable: makeSelectHomePage()
 });
 
 function mapDispatchToProps(dispatch) {

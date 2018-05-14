@@ -12,10 +12,13 @@ import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import { makeSelectLoginPage } from '../LoginPage/selectors';
+
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectHeaderPage from './selectors';
-import { makeSelectloginPage } from './selectors';
+// import { makeSelectloginPage } from './selectors';
+import { makeSelectGloble } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -25,21 +28,48 @@ export class HeaderPage extends React.Component { // eslint-disable-line react/p
   
   
   render() {
-    console.log(this.props);
-    const route = [
-      {
-        link: '/signup',
-        title: 'Sign Up'
-      },
-      {
-        link: '/signin',
-        title: 'Sign in'
-      },
-      {
-        link: '/',
-        title: 'Home'
-      },
-  ]; 
+
+    let route;
+
+    if (this.props.userCurrent.isLogin) {
+      route = [
+        {
+          link: '/profile?id='+this.props.userCurrent.id,
+          title: this.props.userCurrent.userName
+        },
+        {
+          link: '/setting',
+          title: 'Settings'
+        },
+        {
+          link: '/newpost',
+          title: 'New Post'
+        },
+        {
+          link: '/',
+          title: 'Home'
+        },
+      ]; 
+
+      
+    } else {
+      route = [
+        {
+          link: '/signup',
+          title: 'Sign Up'
+        },
+        {
+          link: '/signin',
+          title: 'Sign in'
+        },
+        {
+          link: '/',
+          title: 'Home'
+        },
+      ]; 
+    }
+
+    
     return (
       <div>
         <Helmet>
@@ -58,7 +88,9 @@ HeaderPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   headerpage: makeSelectHeaderPage(),
-  loginPage: makeSelectloginPage(),
+  // loginPage: makeSelectloginPage(),
+  globalVariable : makeSelectGloble(),
+  userCurrent: makeSelectLoginPage()
 });
 
 function mapDispatchToProps(dispatch) {

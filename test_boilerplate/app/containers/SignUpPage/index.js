@@ -15,11 +15,13 @@ import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectSignUpPage from './selectors';
+// import { makeSelectloginPage } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { Link } from 'react-router-dom';
 import { actSignUp } from './actions';
+import { Redirect } from 'react-router-dom';
 
 export class SignUpPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
@@ -58,6 +60,10 @@ export class SignUpPage extends React.Component { // eslint-disable-line react/p
   }
   
   render() {
+    if (this.props.signuppage.isLogin) {
+      return <Redirect to='/'/>
+    }
+
     return (
       <div className='col-md-6 offset-md-3 col-xs-12'>
         <Helmet>
@@ -130,6 +136,7 @@ SignUpPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   signuppage: makeSelectSignUpPage(),
+  // loginpage: makeSelectloginPage()
 });
 
 function mapDispatchToProps(dispatch) {

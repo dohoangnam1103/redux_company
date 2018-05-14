@@ -1,21 +1,16 @@
 // import { take, call, put, select } from 'redux-saga/effects';
 import { fork, put, takeLatest } from 'redux-saga/effects';
-
 import { getdataSucces, getdataError } from '../HomePage/actions';
-
 import axios from 'axios';
-
 import { getTag } from './actions'
-
 import { CS_FILTER_TAG } from './constants';
+import { linkTags, linkArticles } from '../../utils/api';
 
-const linkRequest = 'https://conduit.productionready.io/api';
 
 export function* fetchTag() {
-  console.log('getTag');
 
   try {
-    const repos = yield axios.get(`${linkRequest}/tags`);
+    const repos = yield axios.get(linkTags);
     yield repos.data !== null && put(getTag(repos.data));
 
   } catch (err) {
@@ -26,9 +21,14 @@ export function* fetchTag() {
 
 
 export function* filterTag (action) {
+
   try {
-    const data = yield axios.get(`${linkRequest}/articles?tag=${action.tag}&limit=10`)
-    debugger
+    const data = yield axios.get(linkArticles, {
+      params : {
+        tag: action.tag,
+        limit: 10
+      }
+    })
     yield  data.data !== undefined && put (getdataSucces(data.data))
   }
   catch(error) {
